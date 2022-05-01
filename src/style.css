@@ -3,8 +3,13 @@
     src: url(fonts/Ubuntu/Ubuntu-Regular.ttf);
 }
 
+@font-face {
+    font-family: Lato;
+    src: url(fonts/Lato/Lato-Regular.ttf);
+}
+
 * {
-    font-family: Ubuntu;
+    font-family: Lato;
     color: white;
     box-sizing: border-box;
 }
@@ -19,7 +24,7 @@ body {
     align-items: center;
     justify-content: space-around;
     height: 55px;
-    background-color: #222;
+    background-color: #212121;
 }
 
 .heading {
@@ -30,8 +35,25 @@ body {
     color: #797979;
 }
 
+.menu {
+    display: flex;
+    gap: 10px;
+}
+
+.add-function {
+
+}
+
+.remove-function {
+
+}
+
 .main-content {
     height: calc(100% - 55px);
+    display: flex;
+}
+
+.project-category-header {
     display: flex;
 }
 
@@ -49,7 +71,7 @@ body {
     gap: 10px;
 }
 
-.category-elements > .project-side, .project-category > .project-category-title {
+.category-elements > .project-side, .project-category-header > .project-category-title {
     font-size: 20px;
 }
 
@@ -58,7 +80,7 @@ body {
 }
 
 .category-elements {
-    margin-left: 15px;
+    margin-left: 10px;
     padding-left: 2px;
     border-left: 2px solid white;
 }
@@ -69,10 +91,11 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    background-color: #292929;
+    background-color: #212121;
 }
 
 .main-section-window {
+    overflow: auto;
     width: 98%;
     height: 98%;
     margin: auto;
@@ -94,23 +117,57 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
 }
 
 .project {
+    background-color: #282828;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .sub-heading {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    gap: 5px;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-heading > .toggle {
+    width: 16px;
+    height: 14px;
+}
+
+.toggle-img {
+    transition: 0.3s;
+    transform: rotate(180deg);
+
+}
+
+.toggle-img.rotated {
+    transform: rotate(90deg);
+}
+
+
+.sub-heading > .heading {
+    display: flex;
+    align-items: center;
     font-size: 28px;
     text-align: center;
+    color: white;
 }
 
 .todo {
+    background-color: #292929;
     font-size: 22px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -118,6 +175,13 @@ body {
     margin: 5px;
     border-radius: 10px;
     flex-wrap: wrap;
+    transition: 0.3s;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .todo.done {
@@ -126,6 +190,8 @@ body {
 }
 
 .todo-main {
+    border-radius: 5px;
+    padding: 5px;
     gap: 5px;
     width: 100%;
     display: flex;
@@ -136,8 +202,12 @@ body {
 .todo-checklist {
     margin: auto;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 3px;
+    width: 100%;
+    background-color: #303030;
+    padding: 5px 0;
 }
 
 .checklist-heading {
@@ -149,6 +219,16 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.checklist-header {
+    display: flex;
+    width: fit-content;
+    gap: 5px;
+}
+
+.checklist-header > .toggle > .toggle-img, .project-category-header > .toggle > .toggle-img {
+    width: 13px;
 }
 
 .checklist-label {
@@ -178,6 +258,7 @@ body {
 
 
 .todo-description {
+    padding-bottom: 10px;
     font-size: 18px;
     margin: auto;
     text-align: center;
@@ -188,22 +269,45 @@ body {
     align-items: center;
 }
 
-.change-priotiry {
+.change-priority {
     width: 28px;
     height: 28px;
     border: 1px solid white;
 }
 
-.change-priotiry#subs::before {
-    content: '-';
-    color: red;
-    opacity: 0.7;
+.change-priority#subs:hover {
+    background-color: red;
 }
 
-.change-priotiry#add::before {
+.change-priority#subs:hover::before {
+    color: #292929;
+}
+
+.change-priority#add:hover {
+    background-color: green;
+}
+
+.change-priority#add:hover::before {
+    color: #292929;
+}
+
+.change-priority#subs::before, .change-priority#add::before{
+    transition: 0.3s;
+    position: relative;
+    font-size: 50px;
+    content: '-';
+    color: red;
+}
+
+.change-priority#subs::before {
+    top: -20px;
+}
+
+.change-priority#add::before {
+    font-size: 30px;
+    top: -5px;
     content: '+';
     color: green;
-    opacity: 0.7;
 }
 
 .todo-duedate, .todo-title, .todo-priority-container, .check-done {
@@ -264,7 +368,7 @@ body {
 }
 
 .title-input {
-    width: 220px;
+    width: 194px;
     font-size: 35px;
     background-color: #2d2d2d;
     border-radius: 5px;
@@ -273,8 +377,10 @@ body {
 .todo-title-content {
     width: fit-content;
     max-width: 220px;
+    max-height: 55px;
     overflow-x: auto;
     font-size: 35px;
+    margin-left: 31px;
 }
 
 .title-edit-icon {
@@ -290,7 +396,7 @@ body {
     margin: auto;
 }
 
-.check-done-button, .change-priotiry {
+.check-done-button, .change-priority {
     margin: auto;
     width: 28px;
     border-radius: 100%;
@@ -320,9 +426,19 @@ body {
     opacity: 1;
 }
 
+.checked {
+    opacity: 1;
+    background-color: green;
+}
+
+
 /* width */
 ::-webkit-scrollbar {
     height: 5px;
+  }
+::-webkit-scrollbar {
+    height: 5px;
+    width: 8px;
   }
   
   /* Track */
@@ -346,4 +462,5 @@ body {
       background-color: inherit;
       border: 0;
       outline: none;
+      padding: 0;
   }
