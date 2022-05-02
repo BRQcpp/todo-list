@@ -2,11 +2,8 @@ export let logicModule =
 (function()
 {
 
-    function elementFactory(canAddTo)
+    let element = 
     {
-        return {
-            canAddTo
-        }
     }
 
     function todoFactory(title, duedate, priority, description)
@@ -15,6 +12,7 @@ export let logicModule =
             title,
             duedate,
             priority,
+            checklist, 
             description
         }
     }

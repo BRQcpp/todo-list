@@ -8,7 +8,62 @@
     <script src="../dist/main.js" defer></script>
 </head>
 <body>
+    <div class="second-display">
 
+        <div class="select-element-menu" style="display: none;">
+            <button class="sem-option">Category</button>
+            <button class="sem-option">Project</button>
+            <button class="sem-option">Todo</button>
+        </div>
+
+        <div class="set-todo">
+            <div class="todo">
+            <button class="close-button" id="close-second-display">×</button>
+                <div class="todo-main">
+
+                    <div class="todo-title">
+                        <div class="todo-title-content" style="display: none;"></div>
+                        <input class="title-input" data-validate-empty="true" type="text" minlength="1" maxlength="20" placeholder="title" required>
+                    </div>
+
+                    <div class="todo-duedate">
+                        <label  class="todo-label" for="dueDate">Due date</label>
+                        <input class="ddate-input" type="date" name="dueDate" >
+                    </div>
+
+                    <div class="todo-priority-container">
+                        <div class="change-priority round-button" id="subs"></div>
+                        <div class="todo-priority">
+                            <label for="priority" class="todo-label">Priority</label>
+                            <div class="priority-value">normal</div>
+                        </div>
+                        <div class="change-priority round-button" id="add"></div>
+                    </div>
+                </div>
+
+                <div class="todo-checklist" id="toggle-container">
+                    <div class="checklist-header">
+                        <div class="checklist-heading">Checklist</div>
+                    </div>
+                    <div class="checklist"  id="togglable">
+                        <div class="create-checkbox">
+                            <input class="checkbox-title-input" type="text" minlength="1" placeholder="checkbox title" maxlength="30" id="checklist-create" required>    
+                        </div>
+                        <div class="add-checkbox round-button" id="add"></div>
+                    </div>
+
+
+                </div>
+
+                <div class="todo-description"> 
+                    <input class="description-input todo-description" type="text" name="todoDesctiption" id="todo-description" placeholder="description of a todo" validate-empty="false">
+                </div>
+
+            </div>
+            <div class="create-button">Create</div>
+        </div>
+
+    </div>
     <div class="header">
         <div class="heading">Todo list</div>
         <div class="menu">
@@ -76,148 +131,6 @@
                             <div class="toggle">
                                 <img class="toggle-img" src="../dist/graphics/toggle.png" alt="icon of a toggle">
                             </div>
-                            <div class="heading" data-adto="true">project</div>
-                        </div>
-
-                        <div class="todo-list" id="togglable"> 
-                            <div class="todo">
-                                <div class="todo-main">
-    
-                                    <div class="todo-title">
-                                        <div class="todo-title-content">Todo</div>
-                                        <input class="title-input" type="text" value="Todo" minlength="1" maxlength="20" style="display: none;" required>
-                                        <button class="title-edit-icon" id="read-mode" type="submit">
-                                            <img class="edit-icon" src="../dist/graphics/edit-icon.png" alt="edit indicator icon"> 
-                                        </button>
-                                    </div>
-    
-                                    <div class="todo-duedate">
-                                        <label  class="todo-label" for="dueDate">Due date</label>
-                                        <input class="ddate-input" type="date" name="dueDate" value="2022-10-29">
-                                    </div>
-    
-                                    <div class="todo-priority-container">
-                                        <div class="change-priority" id="subs"></div>
-                                        <div class="todo-priority">
-                                            <label for="priority" class="todo-label">Priority</label>
-                                            <input class="priority-input" name="priority" type="text" value="high" readonly>
-                                        </div>
-                                        <div class="change-priority" id="add"></div>
-                                    </div>
-                                    
-                                    <div class="check-done">
-                                        <label  class="check-done-button-container" for="checkDone"><div class="check-done-button" id="mainCB"></div></label>
-                                        <input name="checkDone" class="check-done-input" type="checkbox">
-                                    </div>
-    
-                                </div>
-    
-                                <div class="todo-checklist" id="toggle-container">
-                                    <div class="checklist-header">
-                                        <div class="toggle">
-                                            <img class="toggle-img" src="../dist/graphics/toggle.png" alt="icon of a toggle">
-                                        </div>
-                                        <div class="checklist-heading">Checklist</div>
-                                    </div>
-                                    <div class="checklist"  id="togglable">
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist0" id="checklist-input0">    
-                                            <label class="checklist-label" for="checklist-input0"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist1" id="checklist-input1">    
-                                            <label class="checklist-label" for="checklist-input1"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist2" id="checklist-input2">    
-                                            <label class="checklist-label" for="checklist-input2"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist3" id="checklist-input3">    
-                                            <label class="checklist-label" for="checklist-input3"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                    </div>
-    
-    
-                                </div>
-    
-                                <div class="todo-description"> It is a description of a todo</div>
-    
-                            </div>
-                            <div class="todo">
-                                <div class="todo-main">
-    
-                                    <div class="todo-title">
-                                        <div class="todo-title-content">Todo</div>
-                                        <input class="title-input" type="text" value="Todo" minlength="1" maxlength="20" style="display: none;" required>
-                                        <button class="title-edit-icon" id="read-mode" type="submit">
-                                            <img class="edit-icon" src="../dist/graphics/edit-icon.png" alt="edit indicator icon"> 
-                                        </button>
-                                    </div>
-    
-                                    <div class="todo-duedate">
-                                        <label  class="todo-label" for="dueDate">Due date</label>
-                                        <input class="ddate-input" type="date" name="dueDate" value="2022-10-29">
-                                    </div>
-    
-                                    <div class="todo-priority-container">
-                                        <div class="change-priority" id="subs"></div>
-                                        <div class="todo-priority">
-                                            <label for="priority" class="todo-label">Priority</label>
-                                            <input class="priority-input" name="priority" type="text" value="high" readonly>
-                                        </div>
-                                        <div class="change-priority" id="add"></div>
-                                    </div>
-                                    
-                                    <div class="check-done">
-                                        <label  class="check-done-button-container" for="checkDone"><div class="check-done-button" id="mainCB"></div></label>
-                                        <input name="checkDone" class="check-done-input" type="checkbox">
-                                    </div>
-    
-                                </div>
-    
-                                <div class="todo-checklist" id="toggle-container">
-                                    <div class="checklist-header">
-                                        <div class="toggle">
-                                            <img class="toggle-img" src="../dist/graphics/toggle.png" alt="icon of a toggle">
-                                        </div>
-                                        <div class="checklist-heading">Checklist</div>
-                                    </div>
-                                    <div class="checklist"  id="togglable">
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist0" id="checklist-input0">    
-                                            <label class="checklist-label" for="checklist-input0"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist1" id="checklist-input1">    
-                                            <label class="checklist-label" for="checklist-input1"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist2" id="checklist-input2">    
-                                            <label class="checklist-label" for="checklist-input2"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist3" id="checklist-input3">    
-                                            <label class="checklist-label" for="checklist-input3"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                    </div>
-    
-    
-                                </div>
-    
-                                <div class="todo-description"> It is a description of a todo</div>
-    
-                            </div>
-                        </div>
-                        
-
-                    </div>
-                    
-                    <div class="project" id="toggle-container">
-                        <div class="sub-heading">
-                            <div class="toggle">
-                                <img class="toggle-img" src="../dist/graphics/toggle.png" alt="icon of a toggle">
-                            </div>
                             <div class="heading">project</div>
                         </div>
 
@@ -226,9 +139,9 @@
                                 <div class="todo-main">
     
                                     <div class="todo-title">
-                                        <div class="todo-title-content">Todo</div>
+                                        <div class="todo-title-content" id="text-content">Todo</div>
                                         <input class="title-input" type="text" value="Todo" minlength="1" maxlength="20" style="display: none;" required>
-                                        <button class="title-edit-icon" id="read-mode" type="submit">
+                                        <button class="title-edit-button" id="read-mode">
                                             <img class="edit-icon" src="../dist/graphics/edit-icon.png" alt="edit indicator icon"> 
                                         </button>
                                     </div>
@@ -239,17 +152,16 @@
                                     </div>
     
                                     <div class="todo-priority-container">
-                                        <div class="change-priority" id="subs"></div>
+                                        <div class="change-priority round-button" id="subs"></div>
                                         <div class="todo-priority">
-                                            <label for="priority" class="todo-label">Priority</label>
-                                            <input class="priority-input" name="priority" type="text" value="high" readonly>
+                                            <div class="todo-label">Priority</div>
+                                            <div class="priority-value">normal</div>
                                         </div>
-                                        <div class="change-priority" id="add"></div>
+                                        <div class="change-priority round-button" id="add"></div>
                                     </div>
                                     
                                     <div class="check-done">
-                                        <label  class="check-done-button-container" for="checkDone"><div class="check-done-button" id="mainCB"></div></label>
-                                        <input name="checkDone" class="check-done-input" type="checkbox">
+                                        <div class="check-done-button-container" for="checkDone"><div class="check-done-button" id="mainCB"></div></div>
                                     </div>
     
                                 </div>
@@ -263,91 +175,29 @@
                                     </div>
                                     <div class="checklist"  id="togglable">
                                         <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist0" id="checklist-input0">    
-                                            <label class="checklist-label" for="checklist-input0"><div class="check-done-button"></div>Lorem ipsum</label>
+                                            <div class="check-done-button"></div><div class="checkbox-label">Lorem ipsum</div>
                                         </div>
                                         <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist1" id="checklist-input1">    
-                                            <label class="checklist-label" for="checklist-input1"><div class="check-done-button"></div>Lorem ipsum</label>
+                                            <div class="check-done-button"></div><div class="checkbox-label">Lorem ipsum</div>
                                         </div>
                                         <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist2" id="checklist-input2">    
-                                            <label class="checklist-label" for="checklist-input2"><div class="check-done-button"></div>Lorem ipsum</label>
+                                            <div class="check-done-button"></div> <div class="checkbox-label">Lorem ipsum</div> 
                                         </div>
                                         <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist3" id="checklist-input3">    
-                                            <label class="checklist-label" for="checklist-input3"><div class="check-done-button"></div>Lorem ipsum</label>
+                                            <div class="check-done-button"></div><div class="checkbox-label">Lorem ipsum</div>
                                         </div>
                                     </div>
-    
-    
                                 </div>
     
-                                <div class="todo-description"> It is a description of a todo</div>
-    
-                            </div>
-                            <div class="todo">
-                                <div class="todo-main">
-    
-                                    <div class="todo-title">
-                                        <div class="todo-title-content">Todo</div>
-                                        <input class="title-input" type="text" value="Todo" minlength="1" maxlength="20" style="display: none;" required>
-                                        <button class="title-edit-icon" id="read-mode" type="submit">
-                                            <img class="edit-icon" src="../dist/graphics/edit-icon.png" alt="edit indicator icon"> 
-                                        </button>
-                                    </div>
-    
-                                    <div class="todo-duedate">
-                                        <label  class="todo-label" for="dueDate">Due date</label>
-                                        <input class="ddate-input" type="date" name="dueDate" value="2022-10-29">
-                                    </div>
-    
-                                    <div class="todo-priority-container">
-                                        <div class="change-priority" id="subs"></div>
-                                        <div class="todo-priority">
-                                            <label for="priority" class="todo-label">Priority</label>
-                                            <input class="priority-input" name="priority" type="text" value="high" readonly>
-                                        </div>
-                                        <div class="change-priority" id="add"></div>
-                                    </div>
-                                    
-                                    <div class="check-done">
-                                        <label  class="check-done-button-container" for="checkDone"><div class="check-done-button" id="mainCB"></div></label>
-                                        <input name="checkDone" class="check-done-input" type="checkbox">
-                                    </div>
-    
+                                <div class="todo-description-container"> 
+                                    <div class="todo-description" id="text-content">
+                                        It is a description of a todo
+                                    </div> 
+                                    <input class="description-input todo-description" type="text" minlength="1" maxlength="200" style="display: none;">
+                                    <button class="text-edit-button" id="read-mode">
+                                        <img class="edit-icon" src="../dist/graphics/edit-icon.png" alt="edit indicator icon"> 
+                                    </button>
                                 </div>
-    
-                                <div class="todo-checklist" id="toggle-container">
-                                    <div class="checklist-header">
-                                        <div class="toggle">
-                                            <img class="toggle-img" src="../dist/graphics/toggle.png" alt="icon of a toggle">
-                                        </div>
-                                        <div class="checklist-heading">Checklist</div>
-                                    </div>
-                                    <div class="checklist"  id="togglable">
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist0" id="checklist-input0">    
-                                            <label class="checklist-label" for="checklist-input0"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist1" id="checklist-input1">    
-                                            <label class="checklist-label" for="checklist-input1"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist2" id="checklist-input2">    
-                                            <label class="checklist-label" for="checklist-input2"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                        <div class="checkbox-container">
-                                            <input class="checkbox-input" type="checkbox" name="checklist3" id="checklist-input3">    
-                                            <label class="checklist-label" for="checklist-input3"><div class="check-done-button"></div>Lorem ipsum</label>
-                                        </div>
-                                    </div>
-    
-    
-                                </div>
-    
-                                <div class="todo-description"> It is a description of a todo</div>
     
                             </div>
                         </div>
