@@ -1,4 +1,7 @@
 import { logicModule } from './logic.js';
+import  saveIcon  from './graphics/save-icon.png';
+import  editIcon2  from './graphics/edit-icon.png';
+import  toggleIcon  from './graphics/toggle.png';
 
 export let domModule = 
 (function()
@@ -35,7 +38,7 @@ export let domModule =
         let img = editIcon.querySelector('img');
         if(editIcon.getAttribute('id') == 'read-mode')
         {
-            img.setAttribute('src', 'graphics/save-icon.png');
+            img.setAttribute('src', saveIcon);
             img.setAttribute('alt', 'save indicator icon');
             editIcon.setAttribute('id', 'edit-mode');
             contentDiv.style.setProperty('display', 'none');
@@ -47,7 +50,7 @@ export let domModule =
             if(checkValidityTextEmpty(input) || input.getAttribute('validate-empty') == 'false')
             {
                 contentDiv.textContent = input.value;
-                img.setAttribute('src', 'graphics/edit-icon.png');
+                img.setAttribute('src', editIcon2);
                 img.setAttribute('alt', 'edit indicator icon');
                 editIcon.setAttribute('id', 'read-mode');
                 contentDiv.style.removeProperty('display');
@@ -262,7 +265,7 @@ export let domModule =
 
                             let toggleImg = document.createElement('img'); 
                             toggleImg.classList.add('toggle-img');
-                            toggleImg.setAttribute('src','../dist/graphics/toggle.png');
+                            toggleImg.setAttribute('src', toggleIcon);
                             toggleImg.setAttribute('alt','icon of a toggle');
                             toggleButtons.push(toggleImg);
                             toggleImg.addEventListener('click', () => { projectTogglesAddEventListeners(toggleImg)});
@@ -469,7 +472,7 @@ export let domModule =
 
                     let toggleImg = document.createElement('img');
                     toggleImg.classList.add('toggle-img');
-                    toggleImg.setAttribute('src', '../dist/graphics/toggle.png');
+                    toggleImg.setAttribute('src', toggleIcon);
                     toggleImg.setAttribute('alt', 'icon of a toggle');
                     toggleButtons.push(toggleImg);
                     toggleImg.addEventListener('click', () => {projectTogglesAddEventListeners(toggleImg)});
@@ -575,7 +578,7 @@ export let domModule =
                     
                         let titleEditIcon = document.createElement('img');
                         titleEditIcon.classList.add('edit-icon');
-                        titleEditIcon.setAttribute('src', '../dist/graphics/edit-icon.png');
+                        titleEditIcon.setAttribute('src', editIcon2);
                         titleEditIcon.setAttribute('alt', 'edit indicator icon');
 
                     editIcons.push(titleEditButton);
@@ -683,7 +686,7 @@ export let domModule =
 
                         let checklistToggleImg = document.createElement('img');
                         checklistToggleImg.classList.add('toggle-img');
-                        checklistToggleImg.setAttribute('src', '../dist/graphics/toggle.png');
+                        checklistToggleImg.setAttribute('src', toggleIcon);
                         checklistToggleImg.setAttribute('alt', 'icon of a toggle');
                     toggleButtons.push(checklistToggleImg);
                     checklistToggleImg.addEventListener('click', () => {projectTogglesAddEventListeners(checklistToggleImg)});
@@ -779,7 +782,7 @@ export let domModule =
 
                     let descriptionEditIcon = document.createElement('img');
                     descriptionEditIcon.classList.add('edit-icon');
-                    descriptionEditIcon.setAttribute('src', '../dist/graphics/edit-icon.png');
+                    descriptionEditIcon.setAttribute('src', editIcon2);
                     descriptionEditIcon.setAttribute('alt', 'edit indicator icon');
 
                 editIcons.push(descriptionEditButton);

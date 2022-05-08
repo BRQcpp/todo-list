@@ -472,7 +472,7 @@ body {
 
 .title-input {
     width: 185px;
-    font-size: 35px;
+    font-size: 20px;
     background-color: #2d2d2d;
     border-radius: 5px;
 }
@@ -492,7 +492,7 @@ body {
     max-width: 220px;
     max-height: 55px;
     overflow-x: auto;
-    font-size: 35px;
+    font-size: 20px;
     margin-left: 31px;
 }
 

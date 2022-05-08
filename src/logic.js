@@ -100,18 +100,10 @@ export let logicModule =
         parent.contents = parent.contents.slice(0, index).concat(parent.contents.slice(index+1, parent.contents.length));
     }
     
-    let cat1 = createCategory('first category', []);
-    let cat2 = createCategory('sec category', [0,1]);
-    let cat3 = createCategory('rd category', [0,1]);
-    let cat4 = createCategory('finsec category', [0,1, 2]);
-    let cat5 = createCategory('rt category', [0,1, 2, 3]);
-    let p1 = createProject('Project', [0,1, 2, 3, 5]);
-    let t9 = createTodo('Todo', [0,1, 2, 3, 5, 6], '2022-09-08', 'low', ['first1', 'second2'], 'abc');
-    let t1 = createTodo('Todo', [0,1], '2022-09-08', 'high', [], 'abc');
-    let t2 = createTodo('Todo', [0,1], '2022-09-08', 'high', [], 'abc');
-    let t3 = createTodo('Todo', [0,1], '2022-09-08', 'high', [], 'abc');
-    let t4 = createTodo('Todo', [0,1], '2022-09-08', 'high', [], 'abc');
-    let t5 = createTodo('Todo', [0,1], '2022-09-08', 'high', [], 'abc');
+    let cat1 = createCategory('Home', []);
+    let prj1 = createProject('Cleaning', [0, 1]);
+    let t1 = createTodo('Do the vacuuming', [0,1, 2], '2022-09-08', 'high', ['bedroom', 'kitchen', 'bathroom', 'living room'], 'I need to vacuum the whole house');
+    let t2 = createTodo('Do the ironing', [0,1, 2], '2022-09-11', 'normal', ['pink dress shirt', 'red dress shirt'], 'I need to iron my dress shirts');
 
 
     return {
