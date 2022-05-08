@@ -2,6 +2,7 @@ import { logicModule } from './logic.js';
 import  saveIcon  from './graphics/save-icon.png';
 import  editIcon2  from './graphics/edit-icon.png';
 import  toggleIcon  from './graphics/toggle.png';
+import  githubIcon  from './graphics/GitHub-Mark-Light-32px.png';
 
 export let domModule = 
 (function()
