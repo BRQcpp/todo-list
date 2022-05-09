@@ -220,15 +220,15 @@ export let domModule =
         document.querySelector('.second-display').style.setProperty('display', 'none'); 
     }
 
-    generateDirectory(logicModule.root); //!!!
+   generateDirectory(logicModule.root); //!!!
 
-    let addToElements = Array.from(document.querySelectorAll('[data-adto="true"]'));
+    let addToElements = Array.from(document.querySelectorAll('.category')).concat(Array.from(document.querySelectorAll('.project')));
     addToElements.forEach( addToElement =>
     {
         addToElement.addEventListener('mousedown', (e) =>
         {
             addToElementAction(addToElement);
-            e.stopImmediatePropagation();
+            e.stopPropagation();
         });
     });
     function addToElementAction(addToElement)
@@ -437,33 +437,36 @@ export let domModule =
     {
         let directoryContent = directory.contents;
 
-        if(directoryContent.length != 0)
-        {
+       // if(directoryContent.length != 0)
+       // {
             for(let element of directoryContent)
             {
-                if(element.dueDate == undefined)
-                {
+                //if(element.dueDate == undefined)
+                //{
                     if(element.canContent)
                     {
                         if(element.canContent[0] == 'project')
                         {
                             createCategory(directory, element);
-                            generateDirectory(element);
                         }
                         else if(element.canContent[0] == 'todo')
+                        {
                             createProject(directory, element);
+                        }
+                        generateDirectory(element);
                     }
-                }
-            }
+                    else
+                        createProjectElement(directory, element)
+               // }
+            //}
         }
     }
-    function createCategory(directory, element)
+    function createElementContainer(directory, element)
     {
-        let category = document.createElement('div');
-        category.classList.add('category');
-        category.setAttribute('id', 'toggle-container');
-        category.setAttribute('data-id', element.id);
-        category.setAttribute('data-adto', 'true');
+        let elementContainer = document.createElement('div');
+        elementContainer.setAttribute('id', 'toggle-container');
+        elementContainer.setAttribute('data-id', element.id);
+        elementContainer.setAttribute('data-adto', 'true');
 
             let header = document.createElement('div');
             header.classList.add('project-category-header');
@@ -480,59 +483,65 @@ export let domModule =
                 
                 let icon = document.createElement('div');
                 icon.classList.add('category-project-icon');
-                icon.textContent = 'C';
 
                 let title = document.createElement('div');
                 title.classList.add('project-category-title');
                 title.textContent = element.title;
 
-            let categoryElements = document.createElement('div');
-            categoryElements.classList.add('category-elements');
-            categoryElements.setAttribute('id', 'togglable');
+            let elementContainerContent = document.createElement('div');
+            elementContainerContent.classList.add('element-content');
+            elementContainerContent.setAttribute('id', 'togglable');
 
             toggle.appendChild(toggleImg);
             header.appendChild(toggle);
             header.appendChild(icon);
             header.appendChild(title);
-            category.appendChild(header);
-            category.appendChild(categoryElements);
+            elementContainer.appendChild(header);
+            elementContainer.appendChild(elementContainerContent);
 
-        let parent = document.querySelector(`[data-id="${directory.id}"]`).querySelector('.category-elements');
-        parent.appendChild(category);
+        let parent = document.querySelector(`[data-id="${directory.id}"]`).querySelector('.element-content');
+        parent.appendChild(elementContainer);
         
+        return elementContainer;
+    }
+    function createCategory(directory, element)
+    {
+        let category = createElementContainer(directory, element);
+        category.classList.add('category');
+        category.querySelector('.category-project-icon').textContent = 'C';
         return category;
     }
     function createProject(directory, element)
     {
-        let projectHeader = document.createElement('div');
-        projectHeader.classList.add('project-category-header');
-        projectHeader.setAttribute('data-element', 'project');
-        projectHeader.setAttribute('data-id', element.id);
-        projectHeader.setAttribute('data-adto', 'true');
-
-            let projectIcon = document.createElement('div');
-            projectIcon.classList.add('category-project-icon');
-            projectIcon.textContent = 'P';
-
-            let projectTitle = document.createElement('div');
-            projectTitle.classList.add('project-category-title');
-            projectTitle.textContent = element.title;
-
-            projectHeader.appendChild(projectIcon);
-            projectHeader.appendChild(projectTitle);
-        
-        let parent = document.querySelector(`[data-id="${directory.id}"]`).querySelector('.category-elements');
-        parent.appendChild(projectHeader);
-
-        return projectHeader;
+        let project = createElementContainer(directory, element);
+        project.classList.add('project');
+        project.querySelector('.category-project-icon').textContent = 'P';
+        return project;
     }
-    function createAndAppendTodo(todoValues, parent)
+    function createProjectElement(directory, element)
     {
-        let todo = createTodo(todoValues);
-        parent.appendChild(todo);
-        if(todoValues.isDone)
-            mainCBAddEventListeners(todo.querySelector('.check-done-button'));
+        let projectElementHeader = document.createElement('div');
+        projectElementHeader.classList.add('project-category-header');
+        projectElementHeader.setAttribute('data-element', 'todo');
+        projectElementHeader.setAttribute('data-id', element.id);
+
+            let projectElementIcon = document.createElement('div');
+            projectElementIcon.classList.add('category-project-icon');
+            projectElementIcon.textContent = 'T';
+
+            let projectElementTitle = document.createElement('div');
+            projectElementTitle.classList.add('project-category-title');
+            projectElementTitle.textContent = element.title;
+
+            projectElementHeader.appendChild(projectElementIcon);
+            projectElementHeader.appendChild(projectElementTitle);
+        
+        let parent = document.querySelector(`[data-id="${directory.id}"]`).querySelector('.element-content');
+        parent.appendChild(projectElementHeader);
+
+        return projectElementHeader;
     }
+
     function clearAddTodo(todo)
     {
         todo.querySelector('.title-input').value = '';
@@ -832,7 +841,11 @@ export let domModule =
     function getElementRoute(element)
     {
         let route = [];
-        let id = element.closest('[data-adto="true"]').getAttribute('data-id');
+        let id;
+        if(element.getAttribute('data-element') == 'todo')
+            id = element.getAttribute('data-id');
+        else
+            id = element.closest('[data-adto="true"]').getAttribute('data-id');
         route.push(+id);
         while(id != 0)
         {   
@@ -867,7 +880,6 @@ export let domModule =
             {
                 logicElement = logicModule.createCategory(inputValue, route);
                 newElement = createCategory(parent, logicElement);
-                //addFunction(newElement);
                 newElement.addEventListener('click', () => { addToElementAction(newElement)});
 
             }
@@ -875,14 +887,15 @@ export let domModule =
             {
                 logicElement = logicModule.createProject(inputValue, route);
                 newElement = createProject(parent, logicElement);
-                //addFunction(newElement);
                 newElement.addEventListener('click', () => { addToElementAction(newElement)});
             }
             else 
             {
                 logicElement = logicModule.createTodo(inputValue, route, values.dueDate, values.priority, values.checklist, values.description);
+                newElement = createProjectElement(parent, logicElement);
             }
             addToElements.push(newElement);
+            removeElements.push(newElement);
             if(container.getAttribute('data-displayed') == 'true')
                 generateDirectoryElement(container);
                 
@@ -898,7 +911,7 @@ export let domModule =
     }
     
     let removeFunctionButton = document.querySelector('.remove-function');
-    let removeElements = addToElements.slice(1, addToElements.length);
+    let removeElements = addToElements.slice(1, addToElements.length).concat(Array.from(document.querySelectorAll('[data-element="todo"]')));
     removeFunctionButton.addEventListener('click', () =>
     {
         removeFunction(removeElements);
@@ -922,8 +935,11 @@ export let domModule =
                     {
                         let index = removeElements.indexOf(removeElement);
                         removeElements = removeElements.slice(0, index).concat(removeElements.slice(index+1, removeElement.length));
-                        index = addToElements.indexOf(removeElement);
-                        addToElements = addToElements.slice(0, index).concat(addToElements.slice(index+1, addToElements.length));
+                        if(removeElement.getAttribute('data-element') != 'todo')
+                        {
+                            index = addToElements.indexOf(removeElement);
+                            addToElements = addToElements.slice(0, index).concat(addToElements.slice(index+1, addToElements.length));
+                        }
                         let id = removeElement.getAttribute('data-id');
                         let route = getElementRoute(removeElement);
                         let logicElement = logicModule.findByID(route);
@@ -943,7 +959,7 @@ export let domModule =
 
                             document.querySelector('.main-section-heading').textContent = '';
                         }
-                        e.stopPropagation();
+                        //e.stopPropagation();
                     }
                 });
             });
@@ -960,6 +976,7 @@ export let domModule =
         });
     }
 
-
+    return {
+    }
 }
 )();

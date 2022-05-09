@@ -117,12 +117,12 @@ body {
     color: black;
 }
 
-#first > .project-category-title {
+#first > .project-element-container-title {
     font-size: 27px;
     font-weight: 600;
 }
 
-.category-elements {
+.element-content {
     margin-left: 5px;
     padding-left: 2px;
     border-left: 2px solid #999999;
@@ -165,14 +165,6 @@ body {
 
 .sub-section-placeholder {
     text-align: center;
-}
-
-.project {
-    background-color: #282828;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .sub-heading {
