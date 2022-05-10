@@ -7,6 +7,52 @@ import  toggleIcon  from './graphics/toggle.png';
 export let domModule = 
 (function()
 {
+
+    let lastWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    function adjustElementToWindowSize() //575px
+    {
+        let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        let content =  document.querySelector('.content');
+        if(width < 600)
+        {
+            content.style.setProperty('margin-left', '0px');
+            content.style.setProperty('width', '100%');
+        }
+        else if(content.style.getPropertyValue('margin-left') != '325px')
+            content.style.setProperty('margin-left', '325px');
+    }
+
+    adjustElementToWindowSize();
+
+    window.addEventListener('resize', function(event) {
+        adjustElementToWindowSize();
+    }, true);
+
+    let toggleMenu = document.querySelector('.toggle-menu');
+    toggleMenu.addEventListener('click', ()=>
+    {
+        let toggleIcon = toggleMenu.querySelector('.toggle-menu-icon');
+        if(toggleIcon.style.getPropertyValue('transform') == 'rotate(90deg)')
+        {
+            toggleIcon.style.setProperty('transform', 'rotate(-90deg)');
+            let content = document.querySelector('.content');
+            content.style.setProperty('width', 'calc(100% - 25px)');
+            content.style.setProperty('margin-left', '25px');
+            toggleMenu.closest('.side-menu').style.setProperty('transform', 'translateX(-300px)');
+        }
+        else 
+        {
+            toggleIcon.style.setProperty('transform', 'rotate(90deg)');
+            let content = document.querySelector('.content');
+            content.style.setProperty('width', 'calc(100% - 325px)');
+            content.style.setProperty('margin-left', '325px');
+            toggleMenu.closest('.side-menu').style.removeProperty('transform');
+            adjustElementToWindowSize();
+        }
+    });
+    
+
+
     let addFunctionOn = false;
     let removeFunctionOn = false;
 
@@ -945,10 +991,18 @@ export let domModule =
                         let logicElement = logicModule.findByID(route);
                         let logicParent = logicModule.findByID(route.slice(0, route.length-1));
                         let parentContainer = removeElement.parentElement;
-                        parentContainer.removeChild(removeElement);
+
                         logicModule.removeElement(logicParent, logicElement);
                         turnOffRemoveFunction(removeElements);
-                        if(removeElement.getAttribute('data-displayed') == 'true')
+                        if(removeElement.parentElement.parentElement.getAttribute('data-displayed') == 'true')
+                        {
+                            generateDirectoryElement(removeElement.parentElement.parentElement);
+                        }
+                        else if(removeElement.parentElement.parentElement.parentElement.parentElement.getAttribute('data-displayed') == 'true')
+                        {
+                            generateDirectoryElement(removeElement.parentElement.parentElement.parentElement.parentElement);
+                        }
+                        else if(removeElement.getAttribute('data-displayed') == 'true')
                         {
                             let subSection = document.querySelector('.sub-section');
                             removeChildren(subSection);
@@ -959,7 +1013,8 @@ export let domModule =
 
                             document.querySelector('.main-section-heading').textContent = '';
                         }
-                        //e.stopPropagation();
+                        parentContainer.removeChild(removeElement);
+
                     }
                 });
             });
