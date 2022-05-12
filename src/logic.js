@@ -5,7 +5,7 @@ export let logicModule =
 
     class Element
     {
-        constructor(title)
+        constructor(title, route)
         {
             this.title = title;
             this.id = ++idset;
@@ -14,13 +14,14 @@ export let logicModule =
     
     class Todo extends Element
     {
-        constructor(title, duedate, priority, checklist, description, done = false)
+        constructor(title, duedate, priority, checklist, description, route, done = false)
         {
             super(title);
             this.duedate = duedate;
             this.priority = priority;
             this.checkboxes = checklist;
             this.description = description;
+            this.route = route,
             this.done = done;
         }
     }
@@ -89,8 +90,9 @@ export let logicModule =
     
     function createTodo(title, idRoute, duedate, priority, checklist, description, done = false)
     {
-        let todo = new Todo(title, duedate, priority, checklist, description, done);
+        let todo = new Todo(title, duedate, priority, checklist, description, idRoute, done);
         createElement(todo, idRoute);
+        todos.push(todo);
         return todo;
     }
 
@@ -100,13 +102,15 @@ export let logicModule =
         parent.contents = parent.contents.slice(0, index).concat(parent.contents.slice(index+1, parent.contents.length));
     }
     
+    let todos = [];
+
     let cat1 = createCategory('Home', []);
-    let prj1 = createProject('Cleaning222222222222222222222222222222222222', [0, 1]);
+    let prj1 = createProject('Cleaning', [0, 1]);
     let t1 = createTodo('Do the vacuuming', [0,1, 2], '2022-09-08', 'high', ['bedroom', 'kitchen', 'bathroom', 'living room'], 'I need to vacuum the whole house');
-    let t2 = createTodo('Do the ironing', [0,1, 2], '2022-09-11', 'normal', ['pink dress shirt', 'red dress shirt'], 'I need to iron my dress shirts');
+    let t2 = createTodo('Do the ironing', [0,1, 2], '2022-08-11', 'normal', ['pink dress shirt', 'red dress shirt'], 'I need to iron my dress shirts');
 
 
     return {
-        createTodo, createCategory, createProject, findByID, root, removeElement
+        createTodo, createCategory, createProject, findByID, root, removeElement, todos
     }
 })()
