@@ -52,8 +52,6 @@ body {
 }
 
 .attributes {
-    position: absolute;
-    bottom: 0;
     padding: 5px;
 }
 
@@ -89,20 +87,30 @@ body {
     gap: 5px;
 }
 
-.side-menu {
+.side-menu-elements {
     box-sizing: border-box;
     padding: 0 10px 10px 0;
     width: 300px;
-    height: calc(100% - 55px);
     background-color: #2d2d2d;
     border-right: 2px solid #222;
     position: absolute;
     z-index: 1;
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 55px);
+    overflow-y: auto;
 }
 
 .directory {
-    padding-left: 20px;
+    max-height: 500px;
+    margin-left: 10px;
+}
+
+.directory-elements {
+    overflow-x: auto;
+    padding: 10px 0 10px 0px;
 }
 
 .group-project {
@@ -117,8 +125,8 @@ body {
 }
 
 .category-project-icon {
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -134,7 +142,7 @@ body {
 
 .element-content {
     margin-left: 5px;
-    padding-left: 2px;
+    padding-left: 4px;
     border-left: 2px solid #999999;
 }
 
@@ -178,6 +186,9 @@ body {
 }
 
 .main-section-heading {
+    max-width: 350px;
+    min-height: 53px;
+    overflow: auto;
     margin-top: 10px;
     font-size: 40px;
     margin-left: auto;
@@ -231,6 +242,8 @@ body {
     font-size: 28px;
     text-align: center;
     color: white;
+    max-width: 350px;
+    overflow: auto;
 }
 
 .todo {
@@ -383,9 +396,40 @@ body {
     text-align: center;
 }
 
-.todo-priority-container {
+.todo-period-category {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    margin-bottom: 115px;
+    justify-content: center;
+    gap: 7px;
+}
+
+.heading {
+    font-size: 32px;
+}
+
+.set-period {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.period {
+    width: 185px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.period > input[type="date"] {
+    background-color: #232323;
+    outline: none;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 140px;
 }
 
 .round-button, .check-done-button {

@@ -101,7 +101,7 @@ export let logicModule =
     }
     
     let cat1 = createCategory('Home', []);
-    let prj1 = createProject('Cleaning', [0, 1]);
+    let prj1 = createProject('Cleaning222222222222222222222222222222222222', [0, 1]);
     let t1 = createTodo('Do the vacuuming', [0,1, 2], '2022-09-08', 'high', ['bedroom', 'kitchen', 'bathroom', 'living room'], 'I need to vacuum the whole house');
     let t2 = createTodo('Do the ironing', [0,1, 2], '2022-09-11', 'normal', ['pink dress shirt', 'red dress shirt'], 'I need to iron my dress shirts');
 
