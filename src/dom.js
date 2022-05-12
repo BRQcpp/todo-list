@@ -474,10 +474,13 @@ export let domModule =
     }
     function removeChildren(parent)
     {
+        let removed = [];
         while (parent.firstChild) 
         {
+            removed.push(parent.lastChild);
             parent.removeChild(parent.lastChild);
         }
+        return removed;
     }
     function generateDirectory(directory)
     {
@@ -1008,7 +1011,17 @@ export let domModule =
                             document.querySelector('.main-section-heading').textContent = '';
                         }
                         parentContainer.removeChild(removeElement);
-
+                        if(removeElement.classList.contains('project'))
+                        {
+                            let removeElements = removeElement.querySelector('.element-content').querySelectorAll('.project-category-header');
+                            removeElements.forEach( element =>
+                            {
+                                periodCheckRemoved(element.getAttribute('data-id'));
+                            });  
+                        }
+                        else if(removeElement.classList.contains('project-category-header'))
+                            periodCheckRemoved(removeElement.getAttribute('data-id'));
+      
                     }
                 });
             });
@@ -1059,6 +1072,16 @@ export let domModule =
         });
 
     }
+    function periodCheckRemoved(id)
+    {
+        let container = document.querySelector('.todo-period-list').querySelector('.element-content');
+        let element = container.querySelector(`[data-id="${id}"]`);
+        if(element)
+            container.removeChild(element);
+        if(!(container.lastChild))
+            container.textContent = '-';
+    }
+
 
     return {
     }

@@ -481,6 +481,10 @@ body {
     width: 220px;
 }    
 
+.todo-priority-container {
+    display: flex;
+}
+
 .todo-title {
     display: flex;
     align-items: center;
