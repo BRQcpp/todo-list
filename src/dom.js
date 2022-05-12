@@ -9,7 +9,7 @@ export let domModule =
 {
 
     let lastWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    function adjustElementToWindowSize() //575px
+    function adjustElementToWindowSize() 
     {
         let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         let content =  document.querySelector('.content');
@@ -18,7 +18,7 @@ export let domModule =
             content.style.setProperty('margin-left', '0px');
             content.style.setProperty('width', '100%');
         }
-        else if(content.style.getPropertyValue('margin-left') != '325px')
+        else if(content.style.getPropertyValue('margin-left') != '325px' && document.querySelector('.toggle-menu-icon').style.getPropertyValue('transform') != 'rotate(-90deg)')
             content.style.setProperty('margin-left', '325px');
     }
 
@@ -483,28 +483,22 @@ export let domModule =
     {
         let directoryContent = directory.contents;
 
-       // if(directoryContent.length != 0)
-       // {
             for(let element of directoryContent)
             {
-                //if(element.dueDate == undefined)
-                //{
-                    if(element.canContent)
+                if(element.canContent)
+                {
+                    if(element.canContent[0] == 'project')
                     {
-                        if(element.canContent[0] == 'project')
-                        {
-                            createCategory(directory, element);
-                        }
-                        else if(element.canContent[0] == 'todo')
-                        {
-                            createProject(directory, element);
-                        }
-                        generateDirectory(element);
+                        createCategory(directory, element);
                     }
-                    else
-                        createProjectElement(directory, element)
-               // }
-            //}
+                    else if(element.canContent[0] == 'todo')
+                    {
+                        createProject(directory, element);
+                    }
+                    generateDirectory(element);
+                }
+                else
+                    createProjectElement(directory, element)
         }
     }
     function createElementContainer(directory, element)
@@ -937,7 +931,7 @@ export let domModule =
             }
             else 
             {
-                logicElement = logicModule.createTodo(inputValue, route, values.dueDate, values.priority, values.checklist, values.description);
+                logicElement = logicModule.createTodo(inputValue, route, values.dueDate, values.priority, values.checkboxes, values.description, values.isDone);
                 newElement = createProjectElement(parent, logicElement);
             }
             addToElements.push(newElement);
