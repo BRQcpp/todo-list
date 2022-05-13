@@ -57,6 +57,61 @@ export let domModule =
     let removeFunctionOn = false;
 
 
+    let periodDateInputs = document.querySelector('.set-period').querySelectorAll('input[type="date"]');
+    let today = new Date();
+    today =  today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    periodDateInputs.forEach( input =>
+    {
+        input.value = today;
+        input.addEventListener('change', () => { periodDateInputChangeAction() });
+        periodDateInputChangeAction();
+    });
+    function periodDateInputChangeAction()
+    {
+        let from = periodDateInputs[0].value;
+        let to = periodDateInputs[1].value;
+        let todosInPeriod = [];
+        let elementContent = document.querySelector('.todo-period-list').querySelector('.element-content');
+        if(from <= to)
+        {
+            todosInPeriod = logicModule.todos.filter( (todo) => 
+            {
+                return (todo.duedate >= from &&  todo.duedate <= to);
+            });
+            elementContent.textContent = '';
+        }
+        else 
+            elementContent.textContent = '-';
+
+        todosInPeriod.forEach(todo =>
+        {
+            let newTodo = createProjectElement(-1, todo);
+            newTodo.addEventListener('click', () => { addToElementAction(document.querySelector(`[data-id="${todo.route[todo.route.length-1]}"]`))});
+        });
+
+    }
+    function periodCheckRemoved()
+    {
+        let container = document.querySelector('.todo-period-list').querySelector('.element-content');
+
+        if(container.lastChild)
+        {
+            let elements = container.querySelectorAll('.project-category-header');   
+            let directory = document.querySelector('.directory');
+            for(let element of elements)
+            {
+                let id = element.getAttribute('data-id');
+                if(!(directory.querySelector(`[data-id="${id}"]`)))
+                {
+                    container.removeChild(element);
+                }
+            }
+
+            if(!(container.lastChild))
+                container.textContent = '-';
+        }
+    }
+
     function checkValidityTextEmpty(textInput)
     {
         if(textInput.validity.valueMissing)
@@ -582,6 +637,7 @@ export let domModule =
         
         let parent = document.querySelector(`[data-id="${directory}"]`).querySelector('.element-content');
         parent.appendChild(projectElementHeader);
+        //periodDateInputChangeAction();
 
         return projectElementHeader;
     }
@@ -660,6 +716,7 @@ export let domModule =
                     todoDuedateInput.addEventListener('change', () =>
                     {
                         todoValues.duedate = todoDuedateInput.value;
+                        periodDateInputChangeAction();
                     });
 
                     todoDuedate.appendChild(todoDuedateLabel);
@@ -936,6 +993,7 @@ export let domModule =
             {
                 logicElement = logicModule.createTodo(inputValue, route, values.dueDate, values.priority, values.checkboxes, values.description, values.isDone);
                 newElement = createProjectElement(parent.id, logicElement);
+                periodDateInputChangeAction();
             }
             addToElements.push(newElement);
             removeElements.push(newElement);
@@ -1030,61 +1088,7 @@ export let domModule =
     }
 
 
-    let periodDateInputs = document.querySelector('.set-period').querySelectorAll('input[type="date"]');
-    let today = new Date();
-    today =  today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
-    periodDateInputs.forEach( input =>
-    {
-        input.value = today;
-        input.addEventListener('change', () => { periodDateInputChangeAction() });
-        periodDateInputChangeAction();
-    });
-    function periodDateInputChangeAction()
-    {
-        let from = periodDateInputs[0].value;
-        let to = periodDateInputs[1].value;
-        let todosInPeriod = [];
-        let elementContent = document.querySelector('.todo-period-list').querySelector('.element-content');
-        if(from <= to)
-        {
-            todosInPeriod = logicModule.todos.filter( (todo) => 
-            {
-                return (todo.duedate >= from &&  todo.duedate <= to);
-            });
-            elementContent.textContent = '';
-        }
-        else 
-            elementContent.textContent = '-';
-
-        todosInPeriod.forEach(todo =>
-        {
-            let newTodo = createProjectElement(-1, todo);
-            newTodo.addEventListener('click', () => { addToElementAction(document.querySelector(`[data-id="${todo.route[todo.route.length-1]}"]`))});
-        });
-
-    }
-    function periodCheckRemoved()
-    {
-        let container = document.querySelector('.todo-period-list').querySelector('.element-content');
-
-        if(container.lastChild)
-        {
-            let elements = container.querySelectorAll('.project-category-header');   
-            let directory = document.querySelector('.directory');
-            for(let element of elements)
-            {
-                let id = element.getAttribute('data-id');
-                if(!(directory.querySelector(`[data-id="${id}"]`)))
-                {
-                    container.removeChild(element);
-                }
-            }
-
-            if(!(container.lastChild))
-                container.textContent = '-';
-        }
-
-    }
+  
 
 
     return {
