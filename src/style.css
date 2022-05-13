@@ -87,6 +87,10 @@ body {
     gap: 5px;
 }
 
+.side-menu {
+    transition: 0.3s;
+}
+
 .side-menu-elements {
     box-sizing: border-box;
     padding: 0 10px 10px 0;
@@ -95,7 +99,6 @@ body {
     border-right: 2px solid #222;
     position: absolute;
     z-index: 1;
-    transition: 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -157,6 +160,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .toggle-menu-icon {

@@ -109,7 +109,7 @@ export let logicModule =
     let t1 = createTodo('Do the vacuuming', [0,1, 2], '2022-05-18', 'high', ['bedroom', 'kitchen', 'bathroom', 'living room'], 'I need to vacuum the whole house');
     let t2 = createTodo('Do the ironing', [0,1, 2], '2022-05-12', 'normal', ['pink dress shirt', 'red dress shirt'], 'I need to iron my dress shirts');
     let prj2 = createProject('Homework', [0, 1]);
-    let t3 = createTodo('Write an essay', [0,1, 2, 5], '2022-09-12', 'high', [''], 'Essay about coding');
+    let t3 = createTodo('Write an essay', [0,1, 2, 5], '2022-09-12', 'high', [], 'Essay about coding');
     let t4 = createTodo('Do the math exercises', [0,1, 2, 5], '2022-05-12', 'low', ['1.2/45', '1.3/45'], 'They are quite hard');
 
 

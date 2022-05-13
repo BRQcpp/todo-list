@@ -1010,18 +1010,9 @@ export let domModule =
 
                             document.querySelector('.main-section-heading').textContent = '';
                         }
-                        parentContainer.removeChild(removeElement);
-                        if(removeElement.classList.contains('project'))
-                        {
-                            let removeElements = removeElement.querySelector('.element-content').querySelectorAll('.project-category-header');
-                            removeElements.forEach( element =>
-                            {
-                                periodCheckRemoved(element.getAttribute('data-id'));
-                            });  
-                        }
-                        else if(removeElement.classList.contains('project-category-header'))
-                            periodCheckRemoved(removeElement.getAttribute('data-id'));
-      
+
+                       parentContainer.removeChild(removeElement);
+                       periodCheckRemoved();
                     }
                 });
             });
@@ -1072,14 +1063,27 @@ export let domModule =
         });
 
     }
-    function periodCheckRemoved(id)
+    function periodCheckRemoved()
     {
         let container = document.querySelector('.todo-period-list').querySelector('.element-content');
-        let element = container.querySelector(`[data-id="${id}"]`);
-        if(element)
-            container.removeChild(element);
-        if(!(container.lastChild))
-            container.textContent = '-';
+
+        if(container.lastChild)
+        {
+            let elements = container.querySelectorAll('.project-category-header');   
+            let directory = document.querySelector('.directory');
+            for(let element of elements)
+            {
+                let id = element.getAttribute('data-id');
+                if(!(directory.querySelector(`[data-id="${id}"]`)))
+                {
+                    container.removeChild(element);
+                }
+            }
+
+            if(!(container.lastChild))
+                container.textContent = '-';
+        }
+
     }
 
 
